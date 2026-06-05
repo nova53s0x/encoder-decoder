@@ -1,0 +1,354 @@
+/* style.css - استایل کامل تم مشکی برای Encoder-Decoder */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    position: relative;
+}
+
+/* افکت نقطه‌چین متحرک پس‌زمینه */
+body::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle, rgba(102, 126, 234, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: moveDots 20s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes moveDots {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(40px, 40px);
+    }
+}
+
+/* عنوان اصلی */
+h1 {
+    text-align: center;
+    color: white;
+    font-size: 32px;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
+    animation: fadeInDown 0.6s ease-out;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* پاراگراف‌ها */
+p {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto 20px auto;
+    animation: fadeInUp 0.6s ease-out;
+    color: #ccc;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* استایل اینپوت‌ها */
+input {
+    width: 100%;
+    max-width: 450px;
+    padding: 15px 20px;
+    background: rgba(15, 15, 25, 0.9);
+    border: 2px solid rgba(102, 126, 234, 0.2);
+    border-radius: 12px;
+    color: white;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    outline: none;
+    font-family: 'Segoe UI', monospace;
+    display: block;
+    margin-top: 8px;
+}
+
+input:hover {
+    border-color: rgba(102, 126, 234, 0.5);
+    background: rgba(20, 20, 35, 0.95);
+}
+
+input:focus {
+    border-color: #667eea;
+    background: rgba(20, 20, 35, 1);
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+    transform: translateY(-2px);
+}
+
+input::placeholder {
+    color: #555;
+    font-size: 14px;
+}
+
+/* استایل اینپوت عددی - حذف اسپینر */
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+/* دکمه‌ها */
+button {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 14px 35px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px 8px;
+    min-width: 130px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    letter-spacing: 1px;
+}
+
+/* افکت ریپل برای دکمه‌ها */
+button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+button:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* دکمه decode با رنگ متفاوت */
+#decode {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    box-shadow: 0 5px 15px rgba(245, 87, 108, 0.3);
+}
+
+#decode:hover {
+    box-shadow: 0 8px 25px rgba(245, 87, 108, 0.4);
+}
+
+/* نتیجه */
+#answer {
+    text-align: center;
+    background: rgba(10, 10, 18, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 12px;
+    color: #667eea;
+    font-size: 18px;
+    font-weight: 500;
+    word-break: break-all;
+    font-family: monospace;
+    max-width: 450px;
+    margin: 25px auto 0 auto;
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.5px;
+}
+
+/* وقتی نتیجه پر شد */
+#answer:not(:empty) {
+    border-color: #667eea;
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+    animation: neonPulse 2s ease-in-out infinite;
+}
+
+#decodeKey {
+    text-align: center;
+    background: rgba(10, 10, 18, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 12px;
+    color: #667eea;
+    font-size: 18px;
+    font-weight: 500;
+    word-break: break-all;
+    font-family: monospace;
+    max-width: 450px;
+    margin: 25px auto 0 auto;
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.5px;
+}
+
+/* #decodeKey:not(:empty) {
+    border-color: #667eea;
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+    animation: neonPulse 2s ease-in-out infinite;
+} */
+
+@keyframes neonPulse {
+    0%, 100% {
+        text-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        border-color: rgba(102, 126, 234, 0.3);
+    }
+    50% {
+        text-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
+        border-color: rgba(102, 126, 234, 0.6);
+    }
+}
+
+/* responsive برای موبایل */
+@media (max-width: 600px) {
+    body {
+        padding: 15px;
+    }
+    
+    h1 {
+        font-size: 24px;
+        margin-bottom: 25px;
+    }
+    
+    p {
+        font-size: 12px;
+    }
+
+    input {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+    
+    button {
+        padding: 12px 25px;
+        font-size: 14px;
+        min-width: 110px;
+        margin: 8px 6px;
+    }
+    
+    #answer {
+        font-size: 14px;
+        padding: 15px;
+        margin-top: 20px;
+        min-height: 65px;
+    }
+}
+
+اسکرول بار سفارشی
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a2e;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #667eea;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #764ba2;
+}
+
+/* انیمیشن ورود برای المان‌ها */
+p:first-of-type {
+    animation-delay: 0.1s;
+}
+
+p:last-of-type {
+    animation-delay: 0.2s;
+}
+
+#encode {
+    animation: fadeInUp 0.6s ease-out;
+    animation-delay: 0.3s;
+    animation-fill-mode: both;
+}
+
+#decode {
+    animation: fadeInUp 0.6s ease-out;
+    animation-delay: 0.4s;
+    animation-fill-mode: both;
+}
+
+#answer {
+    animation: fadeInUp 0.6s ease-out;
+    animation-delay: 0.5s;
+    animation-fill-mode: both;
+}
+
+#decodeKey {
+    animation: fadeInUp 0.6s ease-out;
+    animation-delay: 0.5s;
+    animation-fill-mode: both;
+}
